@@ -1,5 +1,3 @@
-# This is where we are going to run the happiness file
-
 import json
 import joblib
 import matplotlib.pyplot as plt
@@ -17,7 +15,7 @@ def clean_text(text):
 
 # Load and preprocess JSON file
 def load_json(file_path):
-    with open(file_path, errors = "ignore") as file:
+    with open(file_path, errors="ignore") as file:
         data = json.load(file)
 
     messages = [m["content"] for m in data["messages"]]
@@ -33,7 +31,7 @@ def predict_sentiment(messages, vectorizer, model):
     
     # Predict sentiment
     predictions = model.predict(transformed_messages)
-    return predictions
+    return predictions, messages
 
 # Generate graphs and insights
 def generate_graphs(messages, predictions):
@@ -58,12 +56,25 @@ def generate_graphs(messages, predictions):
     plt.ylabel('Frequency')
     plt.show()
 
+# Save messages to files
+def save_messages_to_files(messages, predictions, negative_file, positive_file):
+    with open(negative_file, 'w', encoding='utf-8') as neg_file, \
+         open(positive_file, 'w', encoding='utf-8') as pos_file:
+        
+        for message, prediction in zip(messages, predictions):
+            if prediction == 0:  # Assuming 0 = Negative
+                neg_file.write(message + '\n')
+            elif prediction == 1:  # Assuming 1 = Positive
+                pos_file.write(message + '\n')
+
 # Main function
 def main():
     # File paths
-    json_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\cwru2028.json'  # Replace with new JSON file path
+    json_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\cwru2028.json'  # Replace with your JSON file path
     model_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\RealSentiment_model.pkl'
     vectorizer_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\TFIDF_vecotrizer.pkl'
+    negative_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\negative_messages.txt'
+    positive_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\positive_messages.txt'
     
     # Load JSON data
     print("Loading JSON data")
@@ -77,13 +88,19 @@ def main():
     
     # Predict sentiment
     print("Predicting sentiment")
-    predictions = predict_sentiment(messages, vectorizer, model)
+    predictions, messages = predict_sentiment(messages, vectorizer, model)
+    
+    # Save messages to separate files
+    print("Saving messages to text files")
+    save_messages_to_files(messages, predictions, negative_file, positive_file)
     
     # Generate graphs and insights
     print("Generating statistical graphs")
     generate_graphs(messages, predictions)
     
-    print("Analysis complete.")
+    print("Analysis complete. Messages saved to:")
+    print(f"  - Negative messages: {negative_file}")
+    print(f"  - Positive messages: {positive_file}")
 
 if __name__ == '__main__':
     main()

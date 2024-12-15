@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import re
 from nltk.tokenize import word_tokenize
 
+# Copied from the other python file
 def clean_text(text):
     text = re.sub(r'http\S+', '', text)  # Remove URLs
     text = re.sub(r'@\S+', '', text)     # Remove mentions
@@ -18,9 +19,8 @@ def clean_text(text):
 def load_json(file_path):
     with open(file_path, 'r') as file:
         data = json.load(file)
-    
-    # Extract "content" fields
-    messages = [message["content"] for message in data]
+
+    messages = [m["content"] for m in data["messages"]]
     return messages
 
 # Predict sentiment for messages
@@ -61,26 +61,26 @@ def generate_graphs(messages, predictions):
 # Main function
 def main():
     # File paths
-    json_file = 'discord_messages.json'  # Replace with your JSON file path
-    model_file = 'sentiment_model.pkl'
-    vectorizer_file = 'tfidf_vectorizer.pkl'
+    json_file = '/Users/anchen/Documents/GitHub/Happy-Or-Not-Happy/cwru2025.json'  # Replace with new JSON file path
+    model_file = '/Users/anchen/Documents/GitHub/Happy-Or-Not-Happy/RealSentiment_model.pkl'
+    vectorizer_file = '/Users/anchen/Documents/GitHub/Happy-Or-Not-Happy/TFIDF_vecotrizer.pkl'
     
     # Load JSON data
-    print("Loading JSON data...")
+    print("Loading JSON data")
     messages = load_json(json_file)
     print(f"Loaded {len(messages)} messages.")
     
     # Load SVM model and TF-IDF vectorizer
-    print("Loading SVM model and TF-IDF vectorizer...")
+    print("Loading SVM model and TF-IDF vectorizer")
     model = joblib.load(model_file)
     vectorizer = joblib.load(vectorizer_file)
     
     # Predict sentiment
-    print("Predicting sentiment...")
+    print("Predicting sentiment")
     predictions = predict_sentiment(messages, vectorizer, model)
     
     # Generate graphs and insights
-    print("Generating statistical graphs...")
+    print("Generating statistical graphs")
     generate_graphs(messages, predictions)
     
     print("Analysis complete.")

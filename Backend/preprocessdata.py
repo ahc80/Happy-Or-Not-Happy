@@ -5,8 +5,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
 # Uncomment these lines and run once if you havent downloaded the data yet:
-#nltk.download('stopwords')
-#nltk.download('punkt_tab')
+nltk.download('stopwords')
+nltk.download('punkt_tab')
 
 # These Methods are used to process the code so that it easier to read for the machine as well as for us to read
 

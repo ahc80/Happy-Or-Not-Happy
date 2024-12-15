@@ -52,7 +52,8 @@ print(f"Model evaluation completed in {time.time() - eval_start:.2f} seconds.\n"
 # Save the model for later use
 print("Saving")
 save_start = time.time()
-joblib.dump(svm, 'sentiment_model.pkl')
+joblib.dump(svm, 'RealSentiment_model.pkl')
+joblib.dump(vectorizer, 'TFIDF_vecotrizer.pkl')
 print(f"Model saved in {time.time() - save_start:.2f} seconds.\n")
 
 # Total script runtime

@@ -33,29 +33,6 @@ def predict_sentiment(messages, vectorizer, model):
     predictions = model.predict(transformed_messages)
     return predictions, messages
 
-# Generate graphs and insights
-def generate_graphs(messages, predictions):
-    # Sentiment distribution
-    positive_count = sum(predictions)
-    negative_count = len(predictions) - positive_count
-    
-    # Plot sentiment distribution
-    plt.figure(figsize=(8, 6))
-    plt.bar(['Negative', 'Positive'], [negative_count, positive_count], color=['red', 'green'])
-    plt.title('Sentiment Distribution')
-    plt.xlabel('Sentiment')
-    plt.ylabel('Count')
-    plt.show()
-    
-    # Message length distribution
-    message_lengths = [len(msg.split()) for msg in messages]
-    plt.figure(figsize=(8, 6))
-    plt.hist(message_lengths, bins=20, color='blue', alpha=0.7)
-    plt.title('Message Length Distribution')
-    plt.xlabel('Number of Words')
-    plt.ylabel('Frequency')
-    plt.show()
-
 # Save messages to files
 def save_messages_to_files(messages, predictions, negative_file, positive_file):
     with open(negative_file, 'w', encoding='utf-8') as neg_file, \
@@ -70,11 +47,11 @@ def save_messages_to_files(messages, predictions, negative_file, positive_file):
 # Main function
 def main():
     # File paths
-    json_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\cwru2028.json'  # Replace with your JSON file path
+    json_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\cwru2025.json'  # Replace with your JSON file path
     model_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\RealSentiment_model.pkl'
     vectorizer_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\TFIDF_vecotrizer.pkl'
-    negative_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\negative_messages.txt'
-    positive_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\positive_messages.txt'
+    negative_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\negative_messages2025.txt'
+    positive_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\positive_messages2025.txt'
     
     # Load JSON data
     print("Loading JSON data")
@@ -93,10 +70,6 @@ def main():
     # Save messages to separate files
     print("Saving messages to text files")
     save_messages_to_files(messages, predictions, negative_file, positive_file)
-    
-    # Generate graphs and insights
-    print("Generating statistical graphs")
-    generate_graphs(messages, predictions)
     
     print("Analysis complete. Messages saved to:")
     print(f"  - Negative messages: {negative_file}")

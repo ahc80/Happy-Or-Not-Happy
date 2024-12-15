@@ -61,7 +61,7 @@ def generate_graphs(messages, predictions):
 # Main function
 def main():
     # File paths
-    json_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\cwru2028.json'  # Replace with new JSON file path
+    json_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\cwru2025.json'  # Replace with new JSON file path
     model_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\RealSentiment_model.pkl'
     vectorizer_file = r'C:\Users\ahche\OneDrive\Documents\GitHub\Happy-Or-Not-Happy\TFIDF_vecotrizer.pkl'
     

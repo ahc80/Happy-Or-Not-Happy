@@ -49,9 +49,6 @@ This project is a sentiment analysis system that uses an SVM model trained on th
 6. **Export Classified Messages**:
    - Use `textMessages.py` to separate classified messages into `positive_messages.txt` and `negative_messages.txt`.
 
-7. **Presentation**:
-   - Use the results, visualizations, and insights for your project presentation.
-
 ---
 ``` 
 Happy or Not Happy

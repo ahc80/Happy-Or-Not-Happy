@@ -53,7 +53,8 @@ This project is a sentiment analysis system that uses an SVM model trained on th
    - Use the results, visualizations, and insights for your project presentation.
 
 ---
-``` Happy or Not Happy
+``` 
+Happy or Not Happy
 │
 ├── preprocessdata.py      # Preprocess the Sentiment140 dataset
 ├── trainModel.py          # Train the SVM model with TF-IDF features

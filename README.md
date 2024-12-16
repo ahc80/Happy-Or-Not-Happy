@@ -60,4 +60,5 @@ Happy or Not Happy
 ├── trainModel.py          # Train the SVM model with TF-IDF features
 ├── predictHappiness.py    # Predict sentiment of Discord messages
 ├── textMessages.py        # Export positive and negative messages into text files
-└── README.md              # Project documentation ```
+└── README.md              # Project documentation
+```
